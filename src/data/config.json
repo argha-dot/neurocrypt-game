@@ -1,0 +1,8 @@
+{
+    "gameConfig": {
+        "width": 830,
+        "height": 600,
+        "antialias": true,
+        "resolution": 1
+    }
+}
