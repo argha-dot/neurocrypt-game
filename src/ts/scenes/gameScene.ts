@@ -141,7 +141,7 @@ class GameScene extends Scene {
       this.noteSequence = typeIsTrain(this.GAME_DATA.SESSION)
         ? subBlockGen(this.user.passSeq)
         : authBlockGen(this.user.passSeq);
-      this.TOTAL_GAMES = typeIsTrain(this.GAME_DATA.SESSION) ? 1 : 1;
+      this.TOTAL_GAMES = typeIsTrain(this.GAME_DATA.SESSION) ? 7 : 1;
     });
 
     this.hitsText = new BitmapText(`Hits - ${this.hits}`, this.FONT_SETTINGS);

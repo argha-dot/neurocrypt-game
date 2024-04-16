@@ -75,7 +75,7 @@ export const authBlockGen = (passSeq: string[]): string[] => {
   for (let i = 0; i < 6; i++) {
     const randIndex = Math.floor(Math.random() * init.length);
     pi.push(init[randIndex]);
-    init.slice(randIndex, 1);
+    init.toSpliced(randIndex, 1);
   }
 
   pi.forEach((e) => {
