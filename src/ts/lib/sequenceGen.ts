@@ -60,7 +60,7 @@ export const authBlockGen = (passSeq: string[]): string[] => {
   console.log("[GENERATING AUTH BLOCK...]");
   const authBlock: string[] = [];
 
-  const init = [0, 1, 2, 0, 1, 2];
+  let init = [0, 1, 2, 0, 1, 2];
   const pi: number[] = [];
 
   const { 0: k_one, 1: k_two } = [k0, k1, k2].filter(
@@ -75,13 +75,13 @@ export const authBlockGen = (passSeq: string[]): string[] => {
   for (let i = 0; i < 6; i++) {
     const randIndex = Math.floor(Math.random() * init.length);
     pi.push(init[randIndex]);
-    init.toSpliced(randIndex, 1);
+    init.splice(randIndex, 1);
   }
 
   pi.forEach((e) => {
     authBlock.push(...MAP[e]);
   });
 
-  console.log(authBlock.length);
+  console.log(authBlock);
   return authBlock;
 };
