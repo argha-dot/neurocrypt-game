@@ -14,7 +14,7 @@ const genRandomKeys = (length: number): string[] => {
 
       if (randomKey === prevKey) {
         randomKey = keys[Math.floor(Math.random() * keys.length)];
-        continue
+        continue;
       }
 
       break;
@@ -24,11 +24,10 @@ const genRandomKeys = (length: number): string[] => {
   }
 
   return randomKeys;
-}
-
+};
 
 export const subBlockGen = (passSeq: string[]): string[] => {
-  console.log("[GENERATING TRAINING BLOCK...]")
+  console.log("[GENERATING TRAINING BLOCK...]");
 
   let randomKeysCount = 18;
   const subBlock: string[] = [];
@@ -53,22 +52,25 @@ export const subBlockGen = (passSeq: string[]): string[] => {
   subBlock.push(...genRandomKeys(randomKeysCount));
   console.log(indexOfPasses, subBlock);
 
+  console.log(subBlock.length);
   return subBlock;
-}
+};
 
 export const authBlockGen = (passSeq: string[]): string[] => {
-  console.log("[GENERATING AUTH BLOCK...]")
+  console.log("[GENERATING AUTH BLOCK...]");
   const authBlock: string[] = [];
 
   const init = [0, 1, 2, 0, 1, 2];
   const pi: number[] = [];
 
-  const { 0: k_one, 1: k_two } = [k0, k1, k2].filter(arr => arr[0] !== passSeq[0]);
+  const { 0: k_one, 1: k_two } = [k0, k1, k2].filter(
+    (arr) => arr[0] !== passSeq[0]
+  );
   const MAP = [
     passSeq,
     k_one.map((k) => k.toLowerCase()),
-    k_two.map((k) => k.toLowerCase())
-  ]
+    k_two.map((k) => k.toLowerCase()),
+  ];
 
   for (let i = 0; i < 6; i++) {
     const randIndex = Math.floor(Math.random() * init.length);
@@ -77,8 +79,9 @@ export const authBlockGen = (passSeq: string[]): string[] => {
   }
 
   pi.forEach((e) => {
-    authBlock.push(...MAP[e])
-  })
+    authBlock.push(...MAP[e]);
+  });
 
+  console.log(authBlock.length);
   return authBlock;
-}
+};

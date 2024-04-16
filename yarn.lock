@@ -650,14 +650,11 @@
     redux-thunk "^2.3.0"
     reselect "^4.0.0"
 
-<<<<<<< HEAD
 "@types/howler@^2.2.4":
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/@types/howler/-/howler-2.2.4.tgz#fb7d02bc335d20cc141987f16c195b1af77d756a"
   integrity sha512-/Bs5TyNUWuXPnWe3RB6bS6giQzGHRXmSycq4Mo/2i4C6zwfR7foaAAx1Vo5pMyOAT/ufTfU6WZQHhdvCDBKRig==
 
-=======
->>>>>>> 48888cd93f304caec82ca1dc0c877804d0418a1c
 "@types/long@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.1.tgz#459c65fa1867dafe6a8f322c4c51695663cc55e9"

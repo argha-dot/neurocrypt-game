@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { gameDataInterface } from "../../interfaces";
 
-
 interface initialStateInterface {
-  value: gameDataInterface
+  value: gameDataInterface;
 }
 
 const initialState: initialStateInterface = {
   value: {
     gameVer: 0,
-  }
-}
+    AUD: false,
+    VIS: false,
+    SESSION: "TRAIN",
+  },
+};
 
 const gameDataSlice = createSlice({
   name: "game_data",
@@ -18,8 +20,8 @@ const gameDataSlice = createSlice({
   reducers: {
     setGameData: (state, action) => {
       state.value = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { setGameData } = gameDataSlice.actions;

@@ -1,10 +1,10 @@
-import './style.css';
+import "./style.css";
 import app from "./ts/game";
 import passSeqs from "./data/passSeq.json";
 import { $ } from "./ts/lib/dom";
 import { auth, db, provider } from "./ts/lib/firebase";
 import { setGameData, setUser, store } from "./ts/redux";
-
+import { gameDataInterface } from "./ts/interfaces";
 
 $("#app")!.innerHTML = `
   <nav style="background-color: #444444; margin-bottom: 2rem;">
@@ -35,66 +35,107 @@ $("#app")!.innerHTML = `
     </ul>
   </nav>
 <div id="game"></div>
-`
+`;
 
 $("#game")?.appendChild(app.view);
 
-
 $("#signInBtn")?.addEventListener("click", () => {
-  auth.signInWithPopup(provider)
-    .catch(console.error)
+  auth.signInWithPopup(provider).catch(console.error);
 });
 
-
 $("#signOutBtn")?.addEventListener("click", () => {
-  auth.signOut()
+  auth
+    .signOut()
     .then(() => {
       store.dispatch(setUser({ uid: "" }));
     })
-    .catch(console.error)
+    .catch(console.error);
 });
 
+const getGameType = (gameData: gameDataInterface) => {
+  let TYPE = "CONTROL";
 
-auth.onAuthStateChanged(user => {
+  if (gameData.AUD) {
+    TYPE = "AUD";
+  }
+  if (gameData.VIS) {
+    TYPE = "VIS";
+  }
+  if (gameData.AUD && gameData.VIS) {
+    TYPE = "AUTH_VIS";
+  }
+
+  return TYPE;
+};
+
+auth.onAuthStateChanged((user) => {
   if (user) {
     $("#signedIn")!.hidden = false;
     $("#signedOut")!.hidden = true;
     $("#userDetails")!.innerHTML = `<h3>Hello ${user.displayName}</h3>`;
 
     // Set the global game features: AUD or VIS
-    db.ref("_gamedata").once('value')
+    db.ref("_gamedata")
+      .once("value")
       .then((snap) => {
-        store.dispatch(setGameData(snap.val()))
+        console.log(snap.val());
+        store.dispatch(setGameData(snap.val()));
         console.log(store.getState().gameData.value);
       });
 
-
     const userRef = db.ref(user.uid);
-    userRef.once('value')
-      .then((snap) => {
-        const userData = snap.val();
+    userRef.once("value").then((snap) => {
+      const userData = snap.val();
 
-        if (!userData) {
-          if (store.getState().gameData.value.TYPE === "AUTH") {
-            alert("Please contact the guys making the game, something is not right.")
-            return;
-          }
-
-          console.log("[PASS SEQUENCE NOT FOUND]")
-          const vals = Object.values(passSeqs)
-          const pass = vals[Math.floor(Math.random() * vals.length)]
-          userRef.child("passSeq").set(pass);
-
-          store.dispatch(setUser({ ...store.getState().user.value, uid: user.uid, passSeq: pass }));
-        } else {
-          store.dispatch(setUser({ ...store.getState().user.value, uid: user.uid, passSeq: userData.passSeq }));
-          console.log(userData);
-          if (userData.noteSpeed && userData.noteGenerateLag) {
-            store.dispatch(setUser({ ...store.getState().user.value, noteSpeed: userData.noteSpeed, noteGenerateLag: userData.noteGenerateLag }));
-          }
+      if (!userData) {
+        if (store.getState().gameData.value.TYPE === "AUTH") {
+          alert(
+            "Please contact the guys making the game, something is not right."
+          );
+          return;
         }
-      });
 
+        console.log("[PASS SEQUENCE NOT FOUND]");
+        const vals = Object.values(passSeqs);
+        const pass = vals[Math.floor(Math.random() * vals.length)];
+        userRef.child("passSeq").set(pass);
+        console.log(store.getState().gameData.value);
+        let TYPE = getGameType(store.getState().gameData.value);
+
+        userRef.child("GAMETYPE").set(TYPE);
+
+        store.dispatch(
+          setUser({
+            ...store.getState().user.value,
+            uid: user.uid,
+            passSeq: pass,
+          })
+        );
+      } else {
+        console.log("here");
+        console.log(
+          userData.GAMETYPE,
+          getGameType(store.getState().gameData.value),
+          userData.GAMETYPE === getGameType(store.getState().gameData.value)
+        );
+        store.dispatch(
+          setUser({
+            ...store.getState().user.value,
+            uid: user.uid,
+            passSeq: userData.passSeq,
+          })
+        );
+        if (userData.noteSpeed && userData.noteGenerateLag) {
+          store.dispatch(
+            setUser({
+              ...store.getState().user.value,
+              noteSpeed: userData.noteSpeed,
+              noteGenerateLag: userData.noteGenerateLag,
+            })
+          );
+        }
+      }
+    });
   } else {
     $("#signedIn")!.hidden = true;
     $("#signedOut")!.hidden = false;

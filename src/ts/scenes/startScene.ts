@@ -1,19 +1,17 @@
 import { Application, Sprite, Text, Texture } from "pixi.js";
 import { userInterface } from "../interfaces";
 import { createText } from "../lib/engine/helper";
-import { Keyboard } from "../lib/engine/keyboard";
+import { Keyboard } from "../lib/engine/keyboard";
+
 import Scene, { propType } from "../lib/engine/scene";
 import SceneManager from "../lib/engine/sceneManager";
 import { store } from "../redux";
 
-
 export default class StartScene extends Scene {
-
   private background: Sprite;
   private button: Sprite;
   private user: userInterface;
   private title: Text;
-
 
   constructor(app: Application, sceneManager: SceneManager, props?: propType) {
     super(app, sceneManager, props);
@@ -28,8 +26,16 @@ export default class StartScene extends Scene {
     this.button.height = 32;
     this.button.anchor.set(0.5);
 
-    this.button.position.set(this.app.view.width / 2, this.app.view.height / 2 + 25)
-    this.title = createText(this.app.view.width / 2, 200, "SASTA GUITAR HERO PRO", this);
+    this.button.position.set(
+      this.app.view.width / 2,
+      this.app.view.height / 2 + 25
+    );
+    this.title = createText(
+      this.app.view.width / 2,
+      200,
+      "SASTA GUITAR HERO PRO",
+      this
+    );
     this.title.anchor.set(0.5);
 
     this.user = store.getState().user.value;
@@ -53,19 +59,18 @@ export default class StartScene extends Scene {
 
     Keyboard.initialize();
 
-    this.button.on('pointerup', () => {
+    this.button.on("pointerup", () => {
+      console.log(this.user);
       if (this.user.uid) this.scenes.start("game");
       else alert("Please Login");
     });
   }
 
-  public start(): void {
-  }
+  public start(): void {}
 
   public update(_delta: number): void {
     if (Keyboard.state.get("ArrowRight")) {
-      console.log("hello")
+      console.log("hello");
     }
-
   }
 }
