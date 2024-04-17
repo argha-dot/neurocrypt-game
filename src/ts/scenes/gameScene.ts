@@ -595,7 +595,7 @@ class GameScene extends Scene {
 
       this.frets.forEach((fret) => {
         if (fret.isPressed) {
-          fret.fret.tint = 0x222222;
+          fret.fret.tint = 0x555555;
         } else {
           fret.fret.tint = 0x000000;
         }
