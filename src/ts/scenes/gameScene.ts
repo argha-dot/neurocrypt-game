@@ -83,7 +83,7 @@ class GameScene extends Scene {
 
   private noteTimer = 0;
   private noteGenerateLag = 30;
-  private noteSpeed = 8;
+  private noteSpeed = 4;
 
   private noise_vol = 0.3;
 

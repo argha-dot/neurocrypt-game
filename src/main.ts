@@ -62,7 +62,7 @@ const getGameType = (gameData: gameDataInterface) => {
     TYPE = "VIS";
   }
   if (gameData.AUD && gameData.VIS) {
-    TYPE = "AUTH_VIS";
+    TYPE = "AUD_VIS";
   }
 
   return TYPE;
@@ -118,6 +118,16 @@ auth.onAuthStateChanged((user) => {
           getGameType(store.getState().gameData.value),
           userData.GAMETYPE === getGameType(store.getState().gameData.value)
         );
+        if (
+          getGameType(store.getState().gameData.value) !== userData.GAMETYPE
+        ) {
+          alert(
+            `Your GAMETYPE is ${userData.GAMETYPE}, this is a ${getGameType(
+              store.getState().gameData.value
+            )} please contact the game developers.`
+          );
+          return;
+        }
         store.dispatch(
           setUser({
             ...store.getState().user.value,
