@@ -347,10 +347,9 @@ class GameScene extends Scene {
 
       const line = new Graphics();
       if (this.GAME_DATA.VIS) {
-        // line.lineStyle(12, 0x000000, 1);
-        line.lineStyle(4, 0x000000, 1);
+        line.lineStyle(12, 0x000000, 1);
       } else {
-        line.lineStyle(4, 0x000000, 1);
+        line.lineStyle(12, 0x000000, 1);
       }
 
       line.moveTo(offsetX + i * gap, 100);
@@ -605,9 +604,7 @@ class GameScene extends Scene {
       this.notes.forEach((note, index): void => {
         note.move(_delta);
 
-        // if (this.GAME_DATA.VIS) {
-        //   note.induceEpilepsy();
-        // }
+        note.induceEpilepsy();
 
         this.frets.forEach((fret) => {
           if (collisionCheck(fret, note)) {
