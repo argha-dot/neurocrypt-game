@@ -1,7 +1,7 @@
 import Note from "../lib/note";
-import oneSound from "../../../static/audio/one.mp3";
-import twoSound from "../../../static/audio/two.mp3";
-import threeSound from "../../../static/audio/three.mp3";
+// import oneSound from "../../../static/audio/one.mp3";
+// import twoSound from "../../../static/audio/two.mp3";
+// import threeSound from "../../../static/audio/three.mp3";
 import noiseSound from "../../../static/audio/noise.mp3";
 import SceneManager from "../lib/engine/sceneManager";
 import Scene, { propType } from "../lib/engine/scene";
@@ -65,11 +65,11 @@ class GameScene extends Scene {
     loop: true,
     volume: 0.2,
   });
-  private FRET_SOUND = {
-    one: new Howl({ src: [oneSound], volume: 0.4 }),
-    two: new Howl({ src: [twoSound], volume: 0.4 }),
-    three: new Howl({ src: [threeSound], volume: 0.4 }),
-  };
+  // private FRET_SOUND = {
+  //   one: new Howl({ src: [oneSound], volume: 0.4 }),
+  //   two: new Howl({ src: [twoSound], volume: 0.4 }),
+  //   three: new Howl({ src: [threeSound], volume: 0.4 }),
+  // };
   private GAME_DATA!: gameDataInterface;
   private TOTAL_GAMES!: number;
   private gameNunber = 0;
