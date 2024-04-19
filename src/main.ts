@@ -102,7 +102,7 @@ auth.onAuthStateChanged((user) => {
         console.log(store.getState().gameData.value);
         // let TYPE = getGameType(store.getState().gameData.value);
 
-        userRef.child("GAMETYPE").set("CONTROL");
+        userRef.child("GAMETYPE").set("AUD");
 
         store.dispatch(
           setUser({

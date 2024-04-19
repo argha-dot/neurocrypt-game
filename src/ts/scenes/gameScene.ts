@@ -380,32 +380,30 @@ class GameScene extends Scene {
           });
 
         if (!isOtherKeyDown) {
-          // if (this.GAME_DATA.AUD) {
-          //   switch (i) {
-          //     case 0:
-          //       if (!this.frets[i].isPressed) this.FRET_SOUND.one.play();
-          //       break;
-          //     case 1:
-          //       if (!this.frets[i].isPressed) this.FRET_SOUND.two.play();
-          //       break;
-          //     case 2:
-          //       if (!this.frets[i].isPressed) this.FRET_SOUND.three.play();
-          //       break;
-          //     case 3:
-          //       if (!this.frets[i].isPressed) this.FRET_SOUND.two.play();
-          //       break;
-          //     case 4:
-          //       if (!this.frets[i].isPressed) this.FRET_SOUND.three.play();
-          //       break;
-          //     case 5:
-          //       if (!this.frets[i].isPressed) this.FRET_SOUND.one.play();
-          //       break;
-          //
-          //     default:
-          //       this.FRET_SOUND.one.play();
-          //       break;
-          //   }
-          // }
+          switch (i) {
+            case 0:
+              if (!this.frets[i].isPressed) this.FRET_SOUND.one.play();
+              break;
+            case 1:
+              if (!this.frets[i].isPressed) this.FRET_SOUND.two.play();
+              break;
+            case 2:
+              if (!this.frets[i].isPressed) this.FRET_SOUND.three.play();
+              break;
+            case 3:
+              if (!this.frets[i].isPressed) this.FRET_SOUND.two.play();
+              break;
+            case 4:
+              if (!this.frets[i].isPressed) this.FRET_SOUND.three.play();
+              break;
+            case 5:
+              if (!this.frets[i].isPressed) this.FRET_SOUND.one.play();
+              break;
+
+            default:
+              this.FRET_SOUND.one.play();
+              break;
+          }
 
           this.frets[i].isPressed = true;
         }
@@ -573,9 +571,7 @@ class GameScene extends Scene {
     if (Keyboard.state.get("Space")) {
       this.isPaused = false;
 
-      // if (this.GAME_DATA.AUD) {
-      //   if (!this.NOISE_SOUND.playing()) this.NOISE_SOUND.play();
-      // }
+      if (!this.NOISE_SOUND.playing()) this.NOISE_SOUND.play();
     }
 
     if (!this.isPaused) {
