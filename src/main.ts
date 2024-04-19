@@ -4,7 +4,7 @@ import passSeqs from "./data/passSeq.json";
 import { $ } from "./ts/lib/dom";
 import { auth, db, provider } from "./ts/lib/firebase";
 import { setGameData, setUser, store } from "./ts/redux";
-import { gameDataInterface } from "./ts/interfaces";
+// import { gameDataInterface } from "./ts/interfaces";
 
 $("#app")!.innerHTML = `
   <nav style="background-color: #444444; margin-bottom: 2rem;">
@@ -52,21 +52,21 @@ $("#signOutBtn")?.addEventListener("click", () => {
     .catch(console.error);
 });
 
-const getGameType = (gameData: gameDataInterface) => {
-  let TYPE = "CONTROL";
+// const getGameType = (gameData: gameDataInterface) => {
+//   let TYPE = "CONTROL";
 
-  if (gameData.AUD) {
-    TYPE = "AUD";
-  }
-  if (gameData.VIS) {
-    TYPE = "VIS";
-  }
-  if (gameData.AUD && gameData.VIS) {
-    TYPE = "AUD_VIS";
-  }
+//   if (gameData.AUD) {
+//     TYPE = "AUD";
+//   }
+//   if (gameData.VIS) {
+//     TYPE = "VIS";
+//   }
+//   if (gameData.AUD && gameData.VIS) {
+//     TYPE = "AUD_VIS";
+//   }
 
-  return TYPE;
-};
+//   return TYPE;
+// };
 
 auth.onAuthStateChanged((user) => {
   if (user) {
