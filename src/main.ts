@@ -100,9 +100,9 @@ auth.onAuthStateChanged((user) => {
         const pass = vals[Math.floor(Math.random() * vals.length)];
         userRef.child("passSeq").set(pass);
         console.log(store.getState().gameData.value);
-        let TYPE = getGameType(store.getState().gameData.value);
+        // let TYPE = getGameType(store.getState().gameData.value);
 
-        userRef.child("GAMETYPE").set(TYPE);
+        userRef.child("GAMETYPE").set("CONTROL");
 
         store.dispatch(
           setUser({
@@ -112,22 +112,21 @@ auth.onAuthStateChanged((user) => {
           })
         );
       } else {
-        console.log("here");
-        console.log(
-          userData.GAMETYPE,
-          getGameType(store.getState().gameData.value),
-          userData.GAMETYPE === getGameType(store.getState().gameData.value)
-        );
-        if (
-          getGameType(store.getState().gameData.value) !== userData.GAMETYPE
-        ) {
-          alert(
-            `Your GAMETYPE is ${userData.GAMETYPE}, this is a ${getGameType(
-              store.getState().gameData.value
-            )} please contact the game developers.`
-          );
-          return;
-        }
+        // console.log(
+        //   userData.GAMETYPE,
+        //   getGameType(store.getState().gameData.value),
+        //   userData.GAMETYPE === getGameType(store.getState().gameData.value)
+        // );
+        // if (
+        //   getGameType(store.getState().gameData.value) !== userData.GAMETYPE
+        // ) {
+        //   alert(
+        //     `Your GAMETYPE is ${userData.GAMETYPE}, this is a ${getGameType(
+        //       store.getState().gameData.value
+        //     )} please contact the game developers.`
+        //   );
+        //   return;
+        // }
         store.dispatch(
           setUser({
             ...store.getState().user.value,

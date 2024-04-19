@@ -347,7 +347,8 @@ class GameScene extends Scene {
 
       const line = new Graphics();
       if (this.GAME_DATA.VIS) {
-        line.lineStyle(12, 0x000000, 1);
+        // line.lineStyle(12, 0x000000, 1);
+        line.lineStyle(4, 0x000000, 1);
       } else {
         line.lineStyle(4, 0x000000, 1);
       }
@@ -379,32 +380,32 @@ class GameScene extends Scene {
           });
 
         if (!isOtherKeyDown) {
-          if (this.GAME_DATA.AUD) {
-            switch (i) {
-              case 0:
-                if (!this.frets[i].isPressed) this.FRET_SOUND.one.play();
-                break;
-              case 1:
-                if (!this.frets[i].isPressed) this.FRET_SOUND.two.play();
-                break;
-              case 2:
-                if (!this.frets[i].isPressed) this.FRET_SOUND.three.play();
-                break;
-              case 3:
-                if (!this.frets[i].isPressed) this.FRET_SOUND.two.play();
-                break;
-              case 4:
-                if (!this.frets[i].isPressed) this.FRET_SOUND.three.play();
-                break;
-              case 5:
-                if (!this.frets[i].isPressed) this.FRET_SOUND.one.play();
-                break;
-
-              default:
-                this.FRET_SOUND.one.play();
-                break;
-            }
-          }
+          // if (this.GAME_DATA.AUD) {
+          //   switch (i) {
+          //     case 0:
+          //       if (!this.frets[i].isPressed) this.FRET_SOUND.one.play();
+          //       break;
+          //     case 1:
+          //       if (!this.frets[i].isPressed) this.FRET_SOUND.two.play();
+          //       break;
+          //     case 2:
+          //       if (!this.frets[i].isPressed) this.FRET_SOUND.three.play();
+          //       break;
+          //     case 3:
+          //       if (!this.frets[i].isPressed) this.FRET_SOUND.two.play();
+          //       break;
+          //     case 4:
+          //       if (!this.frets[i].isPressed) this.FRET_SOUND.three.play();
+          //       break;
+          //     case 5:
+          //       if (!this.frets[i].isPressed) this.FRET_SOUND.one.play();
+          //       break;
+          //
+          //     default:
+          //       this.FRET_SOUND.one.play();
+          //       break;
+          //   }
+          // }
 
           this.frets[i].isPressed = true;
         }
@@ -572,9 +573,9 @@ class GameScene extends Scene {
     if (Keyboard.state.get("Space")) {
       this.isPaused = false;
 
-      if (this.GAME_DATA.AUD) {
-        if (!this.NOISE_SOUND.playing()) this.NOISE_SOUND.play();
-      }
+      // if (this.GAME_DATA.AUD) {
+      //   if (!this.NOISE_SOUND.playing()) this.NOISE_SOUND.play();
+      // }
     }
 
     if (!this.isPaused) {
@@ -604,9 +605,9 @@ class GameScene extends Scene {
       this.notes.forEach((note, index): void => {
         note.move(_delta);
 
-        if (this.GAME_DATA.VIS) {
-          note.induceEpilepsy();
-        }
+        // if (this.GAME_DATA.VIS) {
+        //   note.induceEpilepsy();
+        // }
 
         this.frets.forEach((fret) => {
           if (collisionCheck(fret, note)) {
